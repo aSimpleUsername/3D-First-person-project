@@ -31,16 +31,25 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="display.c">
+		<Unit filename="animation.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="display.h" />
+		<Unit filename="animation.h" />
+		<Unit filename="drawScene.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="drawScene.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="modelLoader.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="modelLoader.h" />
 		<Unit filename="userInput.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="userInput.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
