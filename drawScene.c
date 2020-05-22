@@ -33,7 +33,7 @@ void drawSunset(void)
 
 void drawFloor(void)
 {
-    int flength = 100;    //floor length  = units either side from 0,0
+    float flength = 100;    //floor length  = units either side from 0,0
 
     glPushMatrix();
     glColor3f(0,0,0);
@@ -54,6 +54,31 @@ void drawFloor(void)
         glVertex3f(-flength,0,i);
         glVertex3f(flength,0,i);
     };
+    glEnd();
+    glPopMatrix();
+}
+
+objStats wallStats;
+    float wwidth = 2;
+    float wheight = 2;
+    float distAbvGnd = 4;       //distance above ground
+    float sideOffset = -5;       //temporary
+
+objStats wallStats = {.xmin = -2, .xmax = 2,
+            .ymin = 4, .ymax = 4 + 2,
+            .zmin = -5, .zmax = -5};
+
+
+void drawWall(void)
+{
+
+    glPushMatrix();
+    glColor3f(0.0, 0.8, 1.0);
+    glBegin(GL_QUADS);
+    glVertex3f(wallStats.xmin, wallStats.ymin, wallStats.zmin);
+    glVertex3f(wallStats.xmin, wallStats.ymax, wallStats.zmin);
+    glVertex3f(wallStats.xmax, wallStats.ymax, wallStats.zmin);
+    glVertex3f(wallStats.xmax, wallStats.ymin, wallStats.zmin);
     glEnd();
     glPopMatrix();
 }

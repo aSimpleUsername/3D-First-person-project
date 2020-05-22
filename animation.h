@@ -7,7 +7,10 @@
 
 #include <GL/freeglut.h>
 
+#include "drawScene.h"
+
 #define TIMERSECS 1000/60   //ms in a seccond / frames per seccond
+
 
 extern float startTime;
 extern float prevTime;
@@ -23,6 +26,7 @@ extern point3 currVel, prevVel; 		// current and previous velocity
 
 extern float yRotationAngle;
 extern float objScale;
+
 
 /****************************************************************/
 
