@@ -60,6 +60,28 @@ void animate(void)
         currPos[1] = objScale;
     }
 
+    //collision with walls
+    if (currPos[0] <= wallStats.xmax && currPos[0] >= wallStats.xmin &&
+        currPos[1] <= wallStats.ymax && currPos[1] >= wallStats.ymin &&
+        currPos[2] <= wallStats.zmax + 1 && currPos[2] >= wallStats.zmin - 1)   //wall <= ballSize + a litte extra to stop glitching
+    {
+        currPos[0] = prevPos[0];
+        currPos[1] = prevPos[1];
+        currPos[2] = prevPos[2];
+
+        currVel[0] = - currVel[0];
+        //currVel[1] = - currVel[1];
+        currVel[2] = - currVel[2];
+
+        prevVel[0] = currVel[0];
+        prevVel[1] = currVel[1];
+        prevVel[2] = currVel[2];
+
+        v0[0] *= 0.8;
+        v0[1] *= 0.8;
+        v0[2] *= 0.8;
+    }
+
  // Put curPos to prevPos
     prevPos[0] = currPos[0];
     prevPos[1] = currPos[1];
@@ -70,7 +92,6 @@ void animate(void)
     prevVel[2] = currVel[2];
 
     prevTime = currTime;
-
 }
 
 void resetObject(void)

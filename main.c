@@ -53,6 +53,7 @@ void display(void)
     drawOrientationMarker();
     drawSunset();
     drawFloor();
+    drawWall();
     drawBall();
 
     //draw3DShape(myBone);      to test modelLoader.h works

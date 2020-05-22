@@ -78,17 +78,19 @@ void processKeys(void)
     }
     if(keyStates[50])       //press 2 to throw ball
     {
+        resetObject();
+
         currPos[0] = xc + lx * 2;       //direction we are looking, 2 units away from us
         currPos[1] = yc + ly * 2;
         currPos[2] = zc + lz * 2;
 
-        prevPos[0] = xc + lx * 0;
-        prevPos[1] = yc + ly * 0;
-        prevPos[2] = zc + lz * 0;
+        prevPos[0] = xc + lx;
+        prevPos[1] = yc + ly;
+        prevPos[2] = zc + lz;
 
-        v0[0] = lx * speed * 5;     //set velocity to direction we are facing
-        v0[1] = ly * speed * 5;
-        v0[2] = lz * speed * 5;
+        v0[0] = lx * speed * 15;     //set velocity to direction we are facing
+        v0[1] = ly * speed * 15;
+        v0[2] = lz * speed * 15;
     }
     if(keyStates['w'])      //move forward
     {

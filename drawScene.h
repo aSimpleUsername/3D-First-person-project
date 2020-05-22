@@ -9,12 +9,20 @@
 #include <GL/freeglut.h>
 #include "animation.h"
 
+typedef struct
+{
+    float xmin, xmax, ymin, ymax, zmin, zmax
+}objStats;
+
 
 void drawOrientationMarker(void);
 
 void drawSunset(void);
 
 void drawFloor(void);
+
+extern objStats wallStats;
+void drawWall(void);
 
 void drawBall(void);
 
