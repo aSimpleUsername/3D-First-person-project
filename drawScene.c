@@ -58,14 +58,8 @@ void drawFloor(void)
     glPopMatrix();
 }
 
-objStats wallStats;
-    float wwidth = 2;
-    float wheight = 2;
-    float distAbvGnd = 4;       //distance above ground
-    float sideOffset = -5;       //temporary
-
-objStats wallStats = {.xmin = -2, .xmax = 2,
-            .ymin = 4, .ymax = 4 + 2,
+objStats wallStats = {.xmin = -4, .xmax = 4,
+            .ymin = 4, .ymax = 4 + 4,
             .zmin = -5, .zmax = -5};
 
 
