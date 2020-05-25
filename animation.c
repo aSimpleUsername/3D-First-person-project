@@ -8,7 +8,7 @@ float prevTime;
 
 typedef GLfloat point3[3];
 
-float dropOff = 0.70;      // speed will drop with 30% at each bounce
+float dropOff = 0.50;      // speed will drop 50% at each bounce
 
 point3 g = {0, -9.8, 0};	// this is the acceleration
 point3 startPos = {0, 20, 0};	// the initial position
@@ -49,21 +49,21 @@ void animate(void)
     if (currPos[1] <= objScale + objScale*0.075) //distToFloor <= ballSize + a litte extra to stop glitching
     {
 
-        currVel[0] = - currVel[0] * dropOff;
-        currVel[1] = - currVel[1] * dropOff;
-        currVel[2] = - currVel[2] * dropOff;
+        currVel[0] = currVel[0] * dropOff;
+        currVel[1] = -currVel[1] * dropOff;
+        currVel[2] = currVel[2] * dropOff;
 
-        v0[0] *= 0.8;
-        v0[1] *= 0.8;
-        v0[2] *= 0.8;
+        v0[0] = v0[0] * dropOff;
+        v0[1] = -v0[1] * dropOff;        //ball should bounce up but continue same along x/z
+        v0[2] = v0[2] * dropOff;
 
         currPos[1] = objScale;
     }
 
     //collision with walls
-    if (currPos[0] <= wallStats.xmax && currPos[0] >= wallStats.xmin &&
-        currPos[1] <= wallStats.ymax && currPos[1] >= wallStats.ymin &&
-        currPos[2] <= wallStats.zmax + 1 && currPos[2] >= wallStats.zmin - 1)   //wall <= ballSize + a litte extra to stop glitching
+    if (currPos[0] - objScale <= wallStats.xmax && currPos[0] + objScale >= wallStats.xmin &&
+        currPos[1] - objScale <= wallStats.ymax && currPos[1] + objScale >= wallStats.ymin &&
+        currPos[2] - objScale <= wallStats.zmax + 1 && currPos[2] + objScale >= wallStats.zmin - 1)   //wall <= ballSize + a litte extra to stop glitching
     {
         currPos[0] = prevPos[0];
         currPos[1] = prevPos[1];
@@ -77,9 +77,9 @@ void animate(void)
         prevVel[1] = currVel[1];
         prevVel[2] = currVel[2];
 
-        v0[0] *= 0.8;
-        v0[1] *= 0.8;
-        v0[2] *= 0.8;
+        v0[0] = -v0[0] * dropOff/2;
+        v0[1] = v0[1] * dropOff;     //ball should keep going up/down but will bounce back on x/z axis
+        v0[2] = -v0[2] * dropOff/2;
     }
 
  // Put curPos to prevPos
