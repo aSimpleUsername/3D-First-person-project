@@ -68,29 +68,21 @@ void processKeys(void)
         exit(0);
     if(keyStates[49])       //press 1 to drop ball again
     {
-        currPos[1] = 0;
-        currPos[1] = 100;
-        currPos[1] = 0;
-
-        prevPos[0] = 0;
-        prevPos[1] = 0;
-        prevPos[2] = 0;
+        resetObjects();
     }
     if(keyStates[50])       //press 2 to throw ball
     {
-        resetObject();
+        ball1CurrPos[0] = xc + lx * 2;       //direction we are looking, 2 units away from us
+        ball1CurrPos[1] = yc + ly * 2;
+        ball1CurrPos[2] = zc + lz * 2;
 
-        currPos[0] = xc + lx * 2;       //direction we are looking, 2 units away from us
-        currPos[1] = yc + ly * 2;
-        currPos[2] = zc + lz * 2;
+        ball1PrevPos[0] = xc + lx;
+        ball1PrevPos[1] = yc + ly;
+        ball1PrevPos[2] = zc + lz;
 
-        prevPos[0] = xc + lx;
-        prevPos[1] = yc + ly;
-        prevPos[2] = zc + lz;
-
-        v0[0] = lx * speed * 15;     //set velocity to direction we are facing
-        v0[1] = ly * speed * 15;
-        v0[2] = lz * speed * 15;
+        ball1ThrowVel[0] = lx * speed * 15;     //set velocity to direction we are facing
+        ball1ThrowVel[1] = ly * speed * 15;
+        ball1ThrowVel[2] = lz * speed * 15;
     }
     if(keyStates['w'])      //move forward
     {
@@ -128,13 +120,13 @@ void processKeys(void)
 
     if(keyStates['r'])      //rotatea d
     {
-        yRotationAngle += 1.0f;
-        if(yRotationAngle > 360.0f)
-            yRotationAngle -= 360.0f;
+        ball1YRotationAngle += 1.0f;
+        if(ball1YRotationAngle > 360.0f)
+            ball1YRotationAngle -= 360.0f;
     }
     if(keyStates[43])   //if '+' scale increases
-        objScale += 0.05f;
+        ball1Scale += 0.05f;
     if(keyStates[45])   //if '-' scale decreases
-        objScale -= 0.05f;
+        ball1Scale -= 0.05f;
 
 }

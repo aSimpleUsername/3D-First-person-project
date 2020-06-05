@@ -6,6 +6,7 @@
 #define ANIMATION_H
 
 #include <GL/freeglut.h>
+#include <math.h>
 
 #include "drawScene.h"
 
@@ -18,21 +19,30 @@ typedef GLfloat point3[3];
 
 extern float dropOff;      // speed will drop with 30% at each bounce
 
-extern point3 g;	// this is the acceleration
-extern point3 startPos;	// the initial position
-extern point3 currPos, prevPos;	// the current and previous location of the centre of the ball
-extern point3 v0; 		// initial velocity - set to 0 in all directions
-extern point3 currVel, prevVel; 		// current and previous velocity
+extern point3 gravVel;	// this is the acceleration
 
-extern float yRotationAngle;
-extern float objScale;
+// Ball 1
+extern point3 ball1StartPos;	// the initial position
+extern point3 ball1CurrPos, ball1PrevPos;	// the current and previous location of the centre of the ball
+extern point3 ball1ThrowVel; 		// initial velocity - set to 0 in all directions
+extern point3 ball1CurrVel, ball1PrevVel; 		// current and previous velocity
+extern float ball1YRotationAngle;
+extern float ball1Scale;
+
+// Ball 2
+extern point3 ball2StartPos;	// the initial position
+extern point3 ball2CurrPos, ball2PrevPos;	// the current and previous location of the centre of the ball
+extern point3 ball2ThrowVel; 		// initial velocity - set to 0 in all directions
+extern point3 ball2CurrVel, ball2PrevVel; 		// current and previous velocity
+extern float ball2YRotationAngle;
+extern float ball2Scale;
 
 
 /****************************************************************/
 
 void animate(void);
 
-void resetObject(void);
+void resetObjects(void);
 
 
 
