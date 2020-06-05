@@ -10,14 +10,23 @@ typedef GLfloat point3[3];
 
 float dropOff = 0.50;      // speed will drop 50% at each bounce
 
-point3 g = {0, -9.8, 0};	// this is the acceleration
-point3 startPos = {0, 20, 0};	// the initial position
-point3 currPos, prevPos;	// the current and previous location of the centre of the ball
-point3 v0 ={0, 0, 0}; 		// initial velocity - set to 0 in all directions
-point3 currVel, prevVel; 		// current and previous velocity
+point3 gravVel = {0, -9.8, 0};  //gavity
 
-float yRotationAngle = 0.0f;
-float objScale = 1.0f;
+// Ball 1
+point3 ball1StartPos = {0, 2, 5 };	// the initial position
+point3 ball1CurrPos, ball1PrevPos;	// the current and previous location of the centre of the ball
+point3 ball1ThrowVel ={0, 0, 0}; 		// initial velocity - set to 0 in all directions
+point3 ball1CurrVel, ball1PrevVel; 		// current and previous velocity
+float ball1YRotationAngle = 0.0f;
+float ball1Scale = 1.0f;
+
+// Ball 2
+point3 ball2StartPos = {0, 10, 0 };	// the initial position
+point3 ball2CurrPos, ball2PrevPos;	// the current and previous location of the centre of the ball
+point3 ball2ThrowVel ={0, 0, 0}; 		// initial velocity - set to 0 in all directions
+point3 ball2CurrVel, ball2PrevVel; 		// current and previous velocity
+float ball2YRotationAngle = 0.0f;
+float ball2Scale = 1.0f;
 
 void animate(void)
 {
@@ -32,83 +41,165 @@ void animate(void)
     // Calculate acceleration
     // In our case, it is just the gravity g
 
-
     // Move one step
-    currPos[0] = prevPos[0] + prevVel[0] * timeSincePrevFrame + v0[0] + g[0] * timeSincePrevFrame * timeSincePrevFrame / 2;
-    currPos[1] = prevPos[1] + prevVel[1] * timeSincePrevFrame + v0[1] + g[1] * timeSincePrevFrame * timeSincePrevFrame / 2;
-    currPos[2] = prevPos[2] + prevVel[2] * timeSincePrevFrame + v0[2] + g[2] * timeSincePrevFrame * timeSincePrevFrame / 2;
+    ball1CurrPos[0] = ball1PrevPos[0] + ball1PrevVel[0] * timeSincePrevFrame + ball1ThrowVel[0] + gravVel[0] * timeSincePrevFrame * timeSincePrevFrame / 2;
+    ball1CurrPos[1] = ball1PrevPos[1] + ball1PrevVel[1] * timeSincePrevFrame + ball1ThrowVel[1] + gravVel[1] * timeSincePrevFrame * timeSincePrevFrame / 2;
+    ball1CurrPos[2] = ball1PrevPos[2] + ball1PrevVel[2] * timeSincePrevFrame + ball1ThrowVel[2] + gravVel[2] * timeSincePrevFrame * timeSincePrevFrame / 2;
+
+    ball2CurrPos[0] = ball2PrevPos[0] + ball2PrevVel[0] * timeSincePrevFrame + ball2ThrowVel[0] + gravVel[0] * timeSincePrevFrame * timeSincePrevFrame / 2;
+    ball2CurrPos[1] = ball2PrevPos[1] + ball2PrevVel[1] * timeSincePrevFrame + ball2ThrowVel[1] + gravVel[1] * timeSincePrevFrame * timeSincePrevFrame / 2;
+    ball2CurrPos[2] = ball2PrevPos[2] + ball2PrevVel[2] * timeSincePrevFrame + ball2ThrowVel[2] + gravVel[2] * timeSincePrevFrame * timeSincePrevFrame / 2;
 
     // Calculate current velocity
-    currVel[0] = prevVel[0] + v0[0] + g[0] * timeSincePrevFrame;
-    currVel[1] = prevVel[1] + v0[1] + g[1] * timeSincePrevFrame;
-    currVel[2] = prevVel[2] + v0[2] + g[2] * timeSincePrevFrame;
+    ball1CurrVel[0] = ball1PrevVel[0] + ball1ThrowVel[0] + gravVel[0] * timeSincePrevFrame;
+    ball1CurrVel[1] = ball1PrevVel[1] + ball1ThrowVel[1] + gravVel[1] * timeSincePrevFrame;
+    ball1CurrVel[2] = ball1PrevVel[2] + ball1ThrowVel[2] + gravVel[2] * timeSincePrevFrame;
+
+    ball2CurrVel[0] = ball2PrevVel[0] + ball2ThrowVel[0] + gravVel[0] * timeSincePrevFrame;
+    ball2CurrVel[1] = ball2PrevVel[1] + ball2ThrowVel[1] + gravVel[1] * timeSincePrevFrame;
+    ball2CurrVel[2] = ball2PrevVel[2] + ball2ThrowVel[2] + gravVel[2] * timeSincePrevFrame;
 
     // Check collision
-    float distToFloor = sqrt(currPos[0]*currPos[0] + currPos[1]*currPos[1] + currPos[2] * currPos[2]);
-
-    if (currPos[1] <= objScale + objScale*0.075) //distToFloor <= ballSize + a litte extra to stop glitching
+    //Ball 1 and ground
+    if (ball1CurrPos[1] <= ball1Scale + ball1Scale*0.075) //current position <= ballSize + a litte extra to stop glitching
     {
+        ball1CurrVel[0] = ball1CurrVel[0] * dropOff;
+        ball1CurrVel[1] = -ball1CurrVel[1] * dropOff;
+        ball1CurrVel[2] = ball1CurrVel[2] * dropOff;
 
-        currVel[0] = currVel[0] * dropOff;
-        currVel[1] = -currVel[1] * dropOff;
-        currVel[2] = currVel[2] * dropOff;
+        ball1ThrowVel[0] = ball1ThrowVel[0] * dropOff;
+        ball1ThrowVel[1] = -ball1ThrowVel[1] * dropOff;        //ball should bounce up but continue same along x/z
+        ball1ThrowVel[2] = ball1ThrowVel[2] * dropOff;
 
-        v0[0] = v0[0] * dropOff;
-        v0[1] = -v0[1] * dropOff;        //ball should bounce up but continue same along x/z
-        v0[2] = v0[2] * dropOff;
-
-        currPos[1] = objScale;
+        ball1CurrPos[1] = ball1Scale;
     }
 
-    //collision with walls
-    if (currPos[0] - objScale <= wallStats.xmax && currPos[0] + objScale >= wallStats.xmin &&
-        currPos[1] - objScale <= wallStats.ymax && currPos[1] + objScale >= wallStats.ymin &&
-        currPos[2] - objScale <= wallStats.zmax + 1 && currPos[2] + objScale >= wallStats.zmin - 1)   //wall <= ballSize + a litte extra to stop glitching
+    //Ball 2 and ground
+    if (ball2CurrPos[1] <= ball2Scale + ball2Scale*0.075) //current position <= ballSize + a litte extra to stop glitching
     {
-        currPos[0] = prevPos[0];
-        currPos[1] = prevPos[1];
-        currPos[2] = prevPos[2];
+        ball2CurrVel[0] = ball2CurrVel[0] * dropOff;
+        ball2CurrVel[1] = -ball2CurrVel[1] * dropOff;
+        ball2CurrVel[2] = ball2CurrVel[2] * dropOff;
 
-        currVel[0] = - currVel[0];
+        ball2ThrowVel[0] = ball2ThrowVel[0] * dropOff;
+        ball2ThrowVel[1] = -ball2ThrowVel[1] * dropOff;        //ball should bounce up but continue same along x/z
+        ball2ThrowVel[2] = ball2ThrowVel[2] * dropOff;
+
+        ball2CurrPos[1] = ball2Scale;
+    }
+
+
+    //collision with walls
+    if(ball1CurrPos[0] - ball1Scale <= wallStats.xmax && ball1CurrPos[0] + ball1Scale >= wallStats.xmin &&
+        ball1CurrPos[1] - ball1Scale <= wallStats.ymax && ball1CurrPos[1] + ball1Scale >= wallStats.ymin &&
+        ball1CurrPos[2] - ball1Scale <= wallStats.zmax + 1 && ball1CurrPos[2] + ball1Scale >= wallStats.zmin - 1)   //wall <= ballSize + a litte extra to stop glitching
+    {
+        //ball1CurrPos[0] = ball1PrevPos[0];
+       // ball1CurrPos[1] = ball1PrevPos[1];
+        //ball1CurrPos[2] = ball1PrevPos[2];
+
+        ball1CurrVel[0] = - ball1CurrVel[0];
         //currVel[1] = - currVel[1];
-        currVel[2] = - currVel[2];
+        ball1CurrVel[2] = - ball1CurrVel[2];
 
-        prevVel[0] = currVel[0];
-        prevVel[1] = currVel[1];
-        prevVel[2] = currVel[2];
+        //ball1PrevVel[0] = ball1CurrVel[0];
+        //ball1PrevVel[1] = ball1CurrVel[1];
+        //ball1PrevVel[2] = ball1CurrVel[2];
 
-        v0[0] = -v0[0] * dropOff/2;
-        v0[1] = v0[1] * dropOff;     //ball should keep going up/down but will bounce back on x/z axis
-        v0[2] = -v0[2] * dropOff/2;
+        ball1ThrowVel[0] = -ball1ThrowVel[0] * dropOff/2;
+        ball1ThrowVel[1] = ball1ThrowVel[1] * dropOff;     //ball should keep going up/down but will bounce back on x/z axis
+        ball1ThrowVel[2] = -ball1ThrowVel[2] * dropOff/2;
+    }
+
+    //collision with balls into each other
+    // distance formula: (P1,P2) = sqrt( (x2 -x1)^2 + (y2-y1)^2 + (z )
+    double distance = fabs((sqrt( pow((ball2CurrPos[0] - ball1CurrPos[0]), 2) + pow((ball2CurrPos[1] - ball1CurrPos[1]), 2) + pow((ball2CurrPos[2] - ball1CurrPos[2]), 2))));
+    if(distance <= ball1Scale + ball2Scale)
+     {
+        // Ball 2 physics
+        ball2CurrVel[0] = ball1CurrVel[0];
+        ball2CurrVel[1] = ball2CurrVel[1];
+        ball2CurrVel[2] = ball1CurrVel[2];
+
+        //Ball 1 physics
+        ball1CurrVel[0] = - ball1CurrVel[0];
+        if(ball2CurrPos[1] + ball2Scale < 0 + (ball2Scale * 0.075))      //if ball 2 on the ground plus a little extra to avoid glitching
+           ball1CurrVel[1] = -ball1CurrVel[1];      //reverse y velocity  else maintain it
+        ball1CurrVel[2] = - ball1CurrVel[2];
+
+        //ball 1 velocity deprication
+        ball1ThrowVel[0] = -ball1ThrowVel[0] * dropOff/2;
+        if(ball2CurrPos[1] + ball2Scale < 0 + (ball2Scale * 0.075)) //if ball 2 on the ground plus a little extra to avoid glitching
+            ball1ThrowVel[1] = -ball1ThrowVel[1] * dropOff;  //reverse y velocity  else maintain it
+        else
+            ball1ThrowVel[1] = ball1ThrowVel[1] * dropOff;     //ball should keep going up/down but will bounce back on x/z axis
+        ball1ThrowVel[2] = -ball1ThrowVel[2] * dropOff/2;
+
+
+        //ball 2 velocity depreciation
+        ball2ThrowVel[0] = -ball2ThrowVel[0] * dropOff/2;
+        if(ball1CurrPos[1] + ball1Scale < 0 + (ball1Scale * 0.075)) //if ball 1 on the ground plus a little extra to avoid glitching
+            ball2ThrowVel[1] = -ball2ThrowVel[1] * dropOff;  //reverse y velocity  else maintain it
+        else
+            ball2ThrowVel[1] = ball2ThrowVel[1] * dropOff;     //ball should keep going up/down but will bounce back on x/z axis
+        ball2ThrowVel[2] = -ball2ThrowVel[2] * dropOff/2;
     }
 
  // Put curPos to prevPos
-    prevPos[0] = currPos[0];
-    prevPos[1] = currPos[1];
-    prevPos[2] = currPos[2];
+    //Ball 1
+    ball1PrevPos[0] = ball1CurrPos[0];
+    ball1PrevPos[1] = ball1CurrPos[1];
+    ball1PrevPos[2] = ball1CurrPos[2];
 
-    prevVel[0] = currVel[0];
-    prevVel[1] = currVel[1];
-    prevVel[2] = currVel[2];
+    ball1PrevVel[0] = ball1CurrVel[0];
+    ball1PrevVel[1] = ball1CurrVel[1];
+    ball1PrevVel[2] = ball1CurrVel[2];
+
+    //Ball 2
+    ball2PrevPos[0] = ball2CurrPos[0];
+    ball2PrevPos[1] = ball2CurrPos[1];
+    ball2PrevPos[2] = ball2CurrPos[2];
+
+    ball2PrevVel[0] = ball2CurrVel[0];
+    ball2PrevVel[1] = ball2CurrVel[1];
+    ball2PrevVel[2] = ball2CurrVel[2];
 
     prevTime = currTime;
 }
 
-void resetObject(void)
+void resetObjects(void)
 {
-    currPos[0] = startPos[0];
-    currPos[1] = startPos[1];
-    currPos[2] = startPos[2];
+    // Ball 1
+    ball1CurrPos[0] = ball1StartPos[0];
+    ball1CurrPos[1] = ball1StartPos[1];
+    ball1CurrPos[2] = ball1StartPos[2];
 
-    prevPos[0] = startPos[0];
-    prevPos[1] = startPos[1];
-    prevPos[2] = startPos[2];
+    ball1PrevPos[0] = ball1StartPos[0];
+    ball1PrevPos[1] = ball1StartPos[1];
+    ball1PrevPos[2] = ball1StartPos[2];
 
-    prevVel[0] = 0;
-    prevVel[1] = 0;
-    prevVel[2] = 0;
+    ball1PrevVel[0] = 0;
+    ball1PrevVel[1] = 0;
+    ball1PrevVel[2] = 0;
 
-    currVel[0] = 0;
-    currVel[1] = 0;
-    currVel[2] = 0;
+    ball1CurrVel[0] = 0;
+    ball1CurrVel[1] = 0;
+    ball1CurrVel[2] = 0;
+
+    // Ball 2
+    ball2CurrPos[0] = ball2StartPos[0];
+    ball2CurrPos[1] = ball2StartPos[1];
+    ball1CurrPos[2] = ball1StartPos[2];
+
+    ball2PrevPos[0] = ball2StartPos[0];
+    ball2PrevPos[1] = ball2StartPos[1];
+    ball2PrevPos[2] = ball2StartPos[2];
+
+    ball2PrevVel[0] = 0;
+    ball2PrevVel[1] = 0;
+    ball2PrevVel[2] = 0;
+
+    ball2CurrVel[0] = 0;
+    ball2CurrVel[1] = 0;
+    ball2CurrVel[2] = 0;
 }

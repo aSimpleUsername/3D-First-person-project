@@ -24,7 +24,8 @@ void drawFloor(void);
 extern objStats wallStats;
 void drawWall(void);
 
-void drawBall(void);
+void drawBall1(void);
+void drawBall2(void);
 
 
 #endif // DRAWSCENE_H

@@ -54,7 +54,8 @@ void display(void)
     drawSunset();
     drawFloor();
     drawWall();
-    drawBall();
+    drawBall1();
+    drawBall2();
 
     //draw3DShape(myBone);      to test modelLoader.h works
 
@@ -93,6 +94,7 @@ int main(int argc, char **argv)
     startTime = glutGet(GLUT_ELAPSED_TIME) / 1000.f;
     prevTime = startTime;
 
+    resetObjects();
     glutDisplayFunc(display);
     glutIdleFunc(display);
     glutReshapeFunc(reshape);
@@ -104,7 +106,7 @@ int main(int argc, char **argv)
     glutSetCursor(GLUT_CURSOR_NONE);
     glutWarpPointer(250, 250);      //middle of the initial 500x500 window
 
-    resetObject();
+    //resetObject(); Don't think this is needed
 
     glutMainLoop();
 }

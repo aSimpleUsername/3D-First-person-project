@@ -77,14 +77,26 @@ void drawWall(void)
     glPopMatrix();
 }
 
-void drawBall(void)
+void drawBall1(void)
 {
     glPushMatrix();
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f); //set colour of bone
-    glTranslatef(currPos[0], currPos[1], currPos[2]);
-    glScalef(objScale, objScale, objScale);    //bone can size up or down
-    glRotatef(yRotationAngle, 0.0f, 1.0f, 0.0f);    //rotate bone
-    glutWireSphere(objScale, 20, 16);
+    glTranslatef(ball1CurrPos[0], ball1CurrPos[1], ball1CurrPos[2]);
+    glScalef(ball1Scale, ball1Scale, ball1Scale);    //bone can size up or down
+    glRotatef(ball1YRotationAngle, 0.0f, 1.0f, 0.0f);    //rotate bone
+    glutWireSphere(ball1Scale, 20, 16);
+    glLoadIdentity();
+    glPopMatrix();
+}
+
+void drawBall2(void)
+{
+    glPushMatrix();
+    glColor4f(1.0f, 1.0f, 1.0f, 1.0f); //set colour of bone
+    glTranslatef(ball2CurrPos[0], ball2CurrPos[1], ball2CurrPos[2]);
+    glScalef(ball2Scale, ball2Scale, ball2Scale);    //bone can size up or down
+    glRotatef(ball2YRotationAngle, 0.0f, 1.0f, 0.0f);    //rotate bone
+    glutWireSphere(ball2Scale, 20, 16);
     glLoadIdentity();
     glPopMatrix();
 }
