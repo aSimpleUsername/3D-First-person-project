@@ -14,15 +14,26 @@ typedef struct
     float xmin, xmax, ymin, ymax, zmin, zmax
 }objStats;
 
+void onScreenText();
 
-void drawOrientationMarker(void);
+extern objStats pillarStats;
+void drawPillar(void);
 
 void drawSunset(void);
 
 void drawFloor(void);
 
-extern objStats wallStats;
-void drawWall(void);
+void drawWalls(void);
+
+extern objStats wall1Stats;
+void drawWall1(void);
+
+extern objStats wall2Stats;
+void drawWall2(void);
+
+extern objStats wall3Stats;
+void drawWall3(void);
+
 
 void drawBall1(void);
 void drawBall2(void);
