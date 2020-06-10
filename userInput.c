@@ -12,9 +12,9 @@ float lx = 0;
 float ly = 0;       //default values just to start looking where I want
 float lz = 0;
 // XYZ position of the camera
-float xc = 0;
+float xc = 5;
 float yc = 1;
-float zc = 10;
+float zc = 5;
 float speed = 0.1;
 
 /*************************

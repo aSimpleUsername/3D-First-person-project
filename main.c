@@ -50,12 +50,14 @@ void display(void)
                 xc+lx, yc+ly, zc+lz,
                 0, 1, 0);
 
-    drawOrientationMarker();
+    onScreenText();
+    drawPillar();
     drawSunset();
     drawFloor();
-    drawWall();
+    drawWalls();
     drawBall1();
     drawBall2();
+
 
     //draw3DShape(myBone);      to test modelLoader.h works
 

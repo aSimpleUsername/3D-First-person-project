@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1591347365 source:d:\school\20s1\ict289\assignment2\assignmemt2\main.c
+1591818741 source:d:\school\20s1\ict289\assignment2\assignmemt2\main.c
 	<GL/freeglut.h>
 	<math.h>
 	"drawScene.h"
@@ -7,7 +7,7 @@
 	"animation.h"
 	"modelLoader.h"
 
-1591349127 source:d:\school\20s1\ict289\assignment2\assignmemt2\userinput.c
+1591819082 source:d:\school\20s1\ict289\assignment2\assignmemt2\userinput.c
 	"userInput.h"
 
 1589552234 source:d:\school\20s1\ict289\assignment2\assignmemt2\display.c
@@ -20,11 +20,11 @@
 1589552145 d:\school\20s1\ict289\assignment2\assignmemt2\display.c
 	<GL/freeglut.h>
 
-1591346359 d:\school\20s1\ict289\assignment2\assignmemt2\drawscene.h
+1591817920 d:\school\20s1\ict289\assignment2\assignmemt2\drawscene.h
 	<GL/freeglut.h>
 	"animation.h"
 
-1591346405 source:d:\school\20s1\ict289\assignment2\assignmemt2\drawscene.c
+1591820244 source:d:\school\20s1\ict289\assignment2\assignmemt2\drawscene.c
 	"drawScene.h"
 
 1591358636 d:\school\20s1\ict289\assignment2\assignmemt2\animation.h
@@ -32,7 +32,7 @@
 	<math.h>
 	"drawScene.h"
 
-1591349035 source:d:\school\20s1\ict289\assignment2\assignmemt2\animation.c
+1591820156 source:d:\school\20s1\ict289\assignment2\assignmemt2\animation.c
 	"animation.h"
 
 1589618072 d:\school\20s1\ict289\assignment2\assignmemt2\userinput.h
