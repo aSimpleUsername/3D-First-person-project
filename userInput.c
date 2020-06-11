@@ -1,5 +1,8 @@
 #include "userInput.h"
 
+const int true = 1;
+const int false = 0;
+
 
 /****************************
         CAMERA
@@ -23,11 +26,20 @@ float speed = 0.1;
 float xrotSpeed = 0.0005f;    //mouse sensitivity
 float yrotSpeed = 0.0004f;    //mouse sensitivity
 int mx, my;
+int lmbPressed = 0;        //left mouse button pressed = false
 
 void mouseMovement(int x, int y)
 {
     mx = x;     //mouse x
     my = y;     //mouse y
+}
+
+void mouseClick(int button, int state, int x, int y)
+{
+    if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+        lmbPressed = true;
+    else
+        lmbPressed = false;
 }
 
 void processMouse(void)
@@ -41,15 +53,32 @@ void processMouse(void)
     lz=-sin(angle1)*cos(angle);
 
     glutWarpPointer((1920/2), (1080/2));
+
+    if(lmbPressed && ballHeld)
+    {
+        ball1CurrPos[0] = xc + lx * 2;       //direction we are looking, 2 units away from us
+        ball1CurrPos[1] = yc + ly * 2;
+        ball1CurrPos[2] = zc + lz * 2;
+
+        ball1PrevPos[0] = xc + lx;
+        ball1PrevPos[1] = yc + ly;
+        ball1PrevPos[2] = zc + lz;
+
+        ball1ThrowVel[0] = lx * speed * 10;     //set velocity to direction we are facing
+        ball1ThrowVel[1] = ly * speed * 10;
+        ball1ThrowVel[2] = lz * speed * 10;
+
+        ballHeld = false;
+    }
+
 }
+
 
 
 /**************************
         KEYBOARD
 **************************/
 
-const int true = 1;
-const int false = 0;
 int* keyStates[256];    //array of 'booleans'
 
 void keyPressed(unsigned char key, int x, int y)
@@ -66,26 +95,11 @@ void processKeys(void)
 {
     if(keyStates[27])      //escape key
         exit(0);
-    if(keyStates['1'])       //press 1 to drop ball again
+    if(keyStates['1'])       //press 1 to reset
     {
         resetObjects();
     }
-    if(keyStates['2'])       //press 2 to throw ball
-    {
-        ball1CurrPos[0] = xc + lx * 2;       //direction we are looking, 2 units away from us
-        ball1CurrPos[1] = yc + ly * 2;
-        ball1CurrPos[2] = zc + lz * 2;
 
-        ball1PrevPos[0] = xc + lx;
-        ball1PrevPos[1] = yc + ly;
-        ball1PrevPos[2] = zc + lz;
-
-        ball1ThrowVel[0] = lx * speed * 5;     //set velocity to direction we are facing
-        ball1ThrowVel[1] = ly * speed * 5;
-        ball1ThrowVel[2] = lz * speed * 5;
-
-        ballHeld = false;
-    }
     if(keyStates['w'])      //move forward
     {
         xc += lx * speed;
@@ -120,21 +134,21 @@ void processKeys(void)
             yc -= speed;
     }
 
-    if(keyStates['r'])      //rotatea d
+    if(keyStates['r'] && ballHeld)      //rotatea d
     {
         ball1YRotationAngle += 1.0f;
         if(ball1YRotationAngle > 360.0f)
             ball1YRotationAngle -= 360.0f;
     }
-    if(keyStates[43])   //if '+' scale increases
+    if(keyStates['k'] && ballHeld)   //if 'j' scale increases
         ball1Scale += 0.05f;
-    if(keyStates[45])   //if '-' scale decreases
+    if(keyStates['j'] && ballHeld)   //if 'k' scale decreases
         ball1Scale -= 0.05f;
 
-    if(keyStates[','])
+    if(keyStates['m'])
         gravMultiplier += 0.01;
 
-    if(keyStates['.'])
+    if(keyStates['n'])
         gravMultiplier -= 0.01;
 
      // distance formula: (P1,P2) = sqrt( (x2 -x1)^2 + (y2-y1)^2 + (z )
@@ -165,14 +179,9 @@ void processKeys(void)
         ball1CurrPos[1] = yc + ly * 2;
         ball1CurrPos[2] = zc + lz * 2;
 
-        ball1PrevPos[0] = ball1CurrPos[0];
-        ball1PrevPos[1] = ball1CurrPos[1];
-        ball1PrevPos[2] = ball1CurrPos[2];
-
         ball1ThrowVel[0] = 0;
         ball1ThrowVel[1] = 0;
         ball1ThrowVel[2] = 0;
-
     }
 
 

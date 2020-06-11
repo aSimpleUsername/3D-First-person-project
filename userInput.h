@@ -27,6 +27,8 @@ extern float yrotSpeed;    //mouse sensitivity
 
 void mouseMovement(int x, int y);
 
+void mouseClick(int button, int state, int x, int y);
+
 void processMouse(void);
 
 void keyPressed(unsigned char key, int x, int y);
