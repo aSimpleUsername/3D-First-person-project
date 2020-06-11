@@ -6,7 +6,7 @@ void onScreenText(void)
     GLdouble width = 1920;
     GLdouble height = 1080;
     float x = 5, y = 20, z = 0;
-    char text[14][50] = {
+    char text[17][50] = {
         {"CONTROLS:\0"},
         {"\0"},
         {"Move: ............................. W A S D\0"},
@@ -18,13 +18,17 @@ void onScreenText(void)
         {"Grow ball: ................................... K\0"},
         {"Shrink ball: ................................. J\0"},
         {"Increase gravity: ...................... M\0"},
-        {"Decrease gravity: ..................... N\0"},
+        {"Decrease gravity: .................... N\0"},
+        {"Increase throw force: ............... O\0"},
+        {"Decrease throw force: .............. I\0"},
         {"\0"},
-        {"GRAVITY PLACEHOLDER"}
+        {"GRAVITY PLACEHOLDER\0"},
+        {"THROW FORCE PLACEHOLDER\0"},
     };
-    sprintf(text[13], "Current gravity: %%%.0f\0:", gravMultiplier*100);
+    sprintf(text[15], "Current gravity ................... %%%.0f\0:", gravMultiplier*100);
+    sprintf(text[16], "Throw force ......................... %%%.0f\0:", throwForce*10);
 
-    for(int i=0; i<14; i++)
+    for(int i=0; i<17; i++)
     {
         glMatrixMode(GL_PROJECTION);
         glPushMatrix();

@@ -19,6 +19,7 @@ typedef GLfloat point3[3];
 
 extern float dropOff;      // speed will drop with 30% at each bounce
 
+extern float airResist;
 extern float gravity;
 extern float gravMultiplier;        //100% earth gravity
 extern point3 gravVel;	// this is the acceleration
@@ -38,6 +39,8 @@ extern point3 ball2ThrowVel; 		// initial velocity - set to 0 in all directions
 extern point3 ball2CurrVel, ball2PrevVel; 		// current and previous velocity
 extern float ball2YRotationAngle;
 extern float ball2Scale;
+
+extern float throwForce;
 
 
 /****************************************************************/
