@@ -103,6 +103,7 @@ int main(int argc, char **argv)
     glutReshapeFunc(reshape);
 
     glutPassiveMotionFunc(mouseMovement);
+    glutMouseFunc(mouseClick);
     glutKeyboardFunc(keyPressed);
     glutKeyboardUpFunc(keyUp);
 

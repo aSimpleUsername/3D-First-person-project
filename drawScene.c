@@ -6,22 +6,25 @@ void onScreenText(void)
     GLdouble width = 1920;
     GLdouble height = 1080;
     float x = 5, y = 20, z = 0;
-    char text[11][50] = {
+    char text[14][50] = {
         {"CONTROLS:\0"},
-        {"Move: w a s d\0"},
-        {"Up: Spacebar\0"},
-        {"Down: c\0"},
-        {"Reset balls: 1\0"},
-        {"Throw ball: 2\0"},
-        {"Rotate ball: r\0"},
-        {"Grow/shrink ball: +/-\0"},
-        {"Increase gravity: ,"},
-        {"Decrease graviry: ."},
+        {"\0"},
+        {"Move: ............................. W A S D\0"},
+        {"Up: ................................. Spacebar\0"},
+        {"Down: ......................................... C\0"},
+        {"Reset balls ................................. 1\0"},
+        {"Throw ball: ... Left Mouse Button\0"},
+        {"Rotate ball: ................................. R\0"},
+        {"Grow ball: ................................... K\0"},
+        {"Shrink ball: ................................. J\0"},
+        {"Increase gravity: ...................... M\0"},
+        {"Decrease gravity: ..................... N\0"},
+        {"\0"},
         {"GRAVITY PLACEHOLDER"}
     };
-    sprintf(text[10], "        Current gravity: %%%.0f\0:", gravMultiplier*100);
+    sprintf(text[13], "Current gravity: %%%.0f\0:", gravMultiplier*100);
 
-    for(int i=0; i<11; i++)
+    for(int i=0; i<14; i++)
     {
         glMatrixMode(GL_PROJECTION);
         glPushMatrix();
