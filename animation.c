@@ -10,10 +10,13 @@ typedef GLfloat point3[3];
 
 float dropOff = 0.50;      // speed will drop 50% at each bounce
 
-point3 gravVel = {0, -9.8, 0};  //gavity
+float gravity = -9.8;
+float airResist = 0;
+float gravMultiplier = 1;
+point3 gravVel = {0, 0, 0};  // initialise, gravity is assigned later
 
 // Ball 1
-point3 ball1StartPos = {0, 2, 5 };	// the initial position
+point3 ball1StartPos = {0, 2, 5};	// the initial position
 point3 ball1CurrPos, ball1PrevPos;	// the current and previous location of the centre of the ball
 point3 ball1ThrowVel ={0, 0, 0}; 		// initial velocity - set to 0 in all directions
 point3 ball1CurrVel, ball1PrevVel; 		// current and previous velocity
@@ -30,7 +33,7 @@ float ball2Scale = 1.0f;
 
 void animate(void)
 {
-     glutTimerFunc(TIMERSECS, animate, 0);
+    glutTimerFunc(TIMERSECS, animate, 0);
 
     float currTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0 ;     // to convert the returned into seconds
     float timeSincePrevFrame = currTime - prevTime;	// time since previous frame
@@ -40,6 +43,8 @@ void animate(void)
 
     // Calculate acceleration
     // In our case, it is just the gravity g
+
+    gravVel[1] = gravity * gravMultiplier;
 
     // Move one step
     ball1CurrPos[0] = ball1PrevPos[0] + ball1PrevVel[0] * timeSincePrevFrame + ball1ThrowVel[0] + gravVel[0] * timeSincePrevFrame * timeSincePrevFrame / 2;
@@ -152,13 +157,16 @@ void animate(void)
     //ball1 vs walls
     if((ball1CurrPos[0] - ball1Scale <= wall1Stats.xmax && ball1CurrPos[0] + ball1Scale >= wall1Stats.xmin &&
         ball1CurrPos[1] - ball1Scale <= wall1Stats.ymax && ball1CurrPos[1] + ball1Scale >= wall1Stats.ymin &&
-        ball1CurrPos[2] - ball1Scale <= wall1Stats.zmax + 1 && ball1CurrPos[2] + ball1Scale >= wall1Stats.zmin - 1) ||      //wall1
+        ball1CurrPos[2] - ball1Scale <= wall1Stats.zmax && ball1CurrPos[2] + ball1Scale >= wall1Stats.zmin) ||      //wall 1
        (ball1CurrPos[0] - ball1Scale <= wall2Stats.xmax && ball1CurrPos[0] + ball1Scale >= wall2Stats.xmin &&
         ball1CurrPos[1] - ball1Scale <= wall2Stats.ymax && ball1CurrPos[1] + ball1Scale >= wall2Stats.ymin &&
-        ball1CurrPos[2] - ball1Scale <= wall2Stats.zmax + 1 && ball1CurrPos[2] + ball1Scale >= wall2Stats.zmin - 1) ||      //wall2
+        ball1CurrPos[2] - ball1Scale <= wall2Stats.zmax && ball1CurrPos[2] + ball1Scale >= wall2Stats.zmin) ||      //wall 2
        (ball1CurrPos[0] - ball1Scale <= wall3Stats.xmax && ball1CurrPos[0] + ball1Scale >= wall3Stats.xmin &&
         ball1CurrPos[1] - ball1Scale <= wall3Stats.ymax && ball1CurrPos[1] + ball1Scale >= wall3Stats.ymin &&
-        ball1CurrPos[2] - ball1Scale <= wall3Stats.zmax + 1 && ball1CurrPos[2] + ball1Scale >= wall3Stats.zmin - 1))        //wall3
+        ball1CurrPos[2] - ball1Scale <= wall3Stats.zmax && ball1CurrPos[2] + ball1Scale >= wall3Stats.zmin) ||      //wall 4
+       (ball1CurrPos[0] - ball1Scale <= wall4Stats.xmax && ball1CurrPos[0] + ball1Scale >= wall4Stats.xmin &&
+        ball1CurrPos[1] - ball1Scale <= wall4Stats.ymax && ball1CurrPos[1] + ball1Scale >= wall4Stats.ymin &&
+        ball1CurrPos[2] - ball1Scale <= wall4Stats.zmax && ball1CurrPos[2] + ball1Scale >= wall4Stats.zmin))        //wall 4
     {
 
         ball1CurrVel[0] = - ball1CurrVel[0];
@@ -171,15 +179,18 @@ void animate(void)
     }
 
         //ball2 vs walls
-    if((ball2CurrPos[0] - ball1Scale <= wall1Stats.xmax && ball2CurrPos[0] + ball1Scale >= wall1Stats.xmin &&
-        ball2CurrPos[1] - ball1Scale <= wall1Stats.ymax && ball2CurrPos[1] + ball1Scale >= wall1Stats.ymin &&
-        ball2CurrPos[2] - ball1Scale <= wall1Stats.zmax + 1 && ball2CurrPos[2] + ball1Scale >= wall1Stats.zmin - 1) ||      //wall1
-       (ball2CurrPos[0] - ball1Scale <= wall2Stats.xmax && ball2CurrPos[0] + ball1Scale >= wall2Stats.xmin &&
-        ball2CurrPos[1] - ball1Scale <= wall2Stats.ymax && ball2CurrPos[1] + ball1Scale >= wall2Stats.ymin &&
-        ball2CurrPos[2] - ball1Scale <= wall2Stats.zmax + 1 && ball2CurrPos[2] + ball1Scale >= wall2Stats.zmin - 1) ||      //wall2
-       (ball2CurrPos[0] - ball1Scale <= wall3Stats.xmax && ball2CurrPos[0] + ball1Scale >= wall3Stats.xmin &&
-        ball2CurrPos[1] - ball1Scale <= wall3Stats.ymax && ball2CurrPos[1] + ball1Scale >= wall3Stats.ymin &&
-        ball2CurrPos[2] - ball1Scale <= wall3Stats.zmax + 1 && ball2CurrPos[2] + ball1Scale >= wall3Stats.zmin - 1))        //wall3
+    if((ball2CurrPos[0] - ball2Scale <= wall1Stats.xmax && ball2CurrPos[0] + ball2Scale >= wall1Stats.xmin &&
+        ball2CurrPos[1] - ball2Scale <= wall1Stats.ymax && ball2CurrPos[1] + ball2Scale >= wall1Stats.ymin &&
+        ball2CurrPos[2] - ball2Scale <= wall1Stats.zmax && ball2CurrPos[2] + ball2Scale >= wall1Stats.zmin) ||      //wall 1
+       (ball2CurrPos[0] - ball2Scale <= wall2Stats.xmax && ball2CurrPos[0] + ball2Scale >= wall2Stats.xmin &&
+        ball2CurrPos[1] - ball2Scale <= wall2Stats.ymax && ball2CurrPos[1] + ball2Scale >= wall2Stats.ymin &&
+        ball2CurrPos[2] - ball2Scale <= wall2Stats.zmax && ball2CurrPos[2] + ball2Scale >= wall2Stats.zmin) ||      //wall 2
+       (ball2CurrPos[0] - ball2Scale <= wall3Stats.xmax && ball2CurrPos[0] + ball2Scale >= wall3Stats.xmin &&
+        ball2CurrPos[1] - ball2Scale <= wall3Stats.ymax && ball2CurrPos[1] + ball2Scale >= wall3Stats.ymin &&
+        ball2CurrPos[2] - ball2Scale <= wall3Stats.zmax && ball2CurrPos[2] + ball2Scale >= wall3Stats.zmin) ||      //wall 4
+       (ball2CurrPos[0] - ball2Scale <= wall4Stats.xmax && ball2CurrPos[0] + ball2Scale >= wall4Stats.xmin &&
+        ball2CurrPos[1] - ball2Scale <= wall4Stats.ymax && ball2CurrPos[1] + ball2Scale >= wall4Stats.ymin &&
+        ball2CurrPos[2] - ball2Scale <= wall4Stats.zmax && ball2CurrPos[2] + ball2Scale >= wall4Stats.zmin))        //wall 4
     {
 
         ball2CurrVel[0] = - ball2CurrVel[0];
@@ -218,15 +229,6 @@ void animate(void)
         else
             ball1ThrowVel[1] = ball1ThrowVel[1] * dropOff;     //ball should keep going up/down but will bounce back on x/z axis
         ball1ThrowVel[2] = -ball1ThrowVel[2] * dropOff/2;
-
-
-        //ball 2 velocity depreciation
-        /*ball2ThrowVel[0] = -ball2ThrowVel[0] * dropOff/2;
-        if(ball1CurrPos[1] + ball1Scale < 0 + (ball1Scale * 0.075)) //if ball 1 on the ground plus a little extra to avoid glitching
-            ball2ThrowVel[1] = -ball2ThrowVel[1] * dropOff;  //reverse y velocity  else maintain it
-        else
-            ball2ThrowVel[1] = ball2ThrowVel[1] * dropOff;     //ball should keep going up/down but will bounce back on x/z axis
-        ball2ThrowVel[2] = -ball2ThrowVel[2] * dropOff/2;*/
     }
 
  // Put curPos to prevPos
@@ -294,4 +296,38 @@ void resetObjects(void)
     ball2ThrowVel[0] = 0;
     ball2ThrowVel[1] = 0;
     ball2ThrowVel[2] = 0;
+}
+
+void ballSwap()
+{
+    // temp storage
+    point3 tempCurrPos, tempPrevPos;	// the current and previous location of the centre of the ball
+    point3 tempThrowVel ={0, 0, 0}; 		// initial velocity - set to 0 in all directions
+    point3 tempCurrVel, tempPrevVel; 		// current and previous velocity
+    float tempYRotationAngle = 0.0f;
+    float tempScale = 0.0f;
+
+    memcpy(tempCurrPos, ball1CurrPos, sizeof(float)*3);
+    memcpy(tempPrevPos, ball1PrevPos, sizeof(float)*3);
+    memcpy(tempThrowVel, ball1ThrowVel, sizeof(float)*3);
+    memcpy(tempCurrVel, ball1CurrVel, sizeof(float)*3);
+    memcpy(tempPrevVel, ball1PrevVel, sizeof(float)*3);
+    tempYRotationAngle = ball1YRotationAngle;
+    tempScale = ball1Scale;
+
+    memcpy(ball1CurrPos, ball2CurrPos, sizeof(float)*3);
+    memcpy(ball1PrevPos, ball2PrevPos, sizeof(float)*3);
+    memcpy(ball1ThrowVel, ball2ThrowVel, sizeof(float)*3);
+    memcpy(ball1CurrVel, ball2CurrVel, sizeof(float)*3);
+    memcpy(ball1PrevVel, ball2PrevVel, sizeof(float)*3);
+    ball1YRotationAngle = ball2YRotationAngle;
+    ball1Scale = ball2Scale;
+
+    memcpy(ball2CurrPos, tempCurrPos, sizeof(float)*3);
+    memcpy(ball2PrevPos, tempPrevPos, sizeof(float)*3);
+    memcpy(ball2ThrowVel, tempThrowVel, sizeof(float)*3);
+    memcpy(ball2CurrVel, tempCurrVel, sizeof(float)*3);
+    memcpy(ball2PrevVel, tempPrevVel, sizeof(float)*3);
+    ball2YRotationAngle = tempYRotationAngle;
+    ball2Scale = tempScale;
 }

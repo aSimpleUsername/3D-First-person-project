@@ -19,6 +19,8 @@ typedef GLfloat point3[3];
 
 extern float dropOff;      // speed will drop with 30% at each bounce
 
+extern float gravity;
+extern float gravMultiplier;        //100% earth gravity
 extern point3 gravVel;	// this is the acceleration
 
 // Ball 1
@@ -43,6 +45,8 @@ extern float ball2Scale;
 void animate(void);
 
 void resetObjects(void);
+
+void ballSwap(void);
 
 
 
