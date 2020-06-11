@@ -11,7 +11,7 @@
 
 typedef struct
 {
-    float xmin, xmax, ymin, ymax, zmin, zmax
+    float xmin, xmax, ymin, ymax, zmin, zmax;
 }objStats;
 
 void onScreenText(void);

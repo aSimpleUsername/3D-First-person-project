@@ -11,7 +11,6 @@ typedef GLfloat point3[3];
 float dropOff = 0.50;      // speed will drop 50% at each bounce
 
 float gravity = -9.8;
-float airResist = 0;
 float gravMultiplier = 1;
 point3 gravVel = {0, 0, 0};  // initialise, gravity is assigned later
 
@@ -31,6 +30,8 @@ point3 ball2CurrVel, ball2PrevVel; 		// current and previous velocity
 float ball2YRotationAngle = 0.0f;
 float ball2Scale = 1.0f;
 
+float throwForce = 10;
+
 void animate(void)
 {
     glutTimerFunc(TIMERSECS, animate, 0);
@@ -45,6 +46,7 @@ void animate(void)
     // In our case, it is just the gravity g
 
     gravVel[1] = gravity * gravMultiplier;
+
 
     // Move one step
     ball1CurrPos[0] = ball1PrevPos[0] + ball1PrevVel[0] * timeSincePrevFrame + ball1ThrowVel[0] + gravVel[0] * timeSincePrevFrame * timeSincePrevFrame / 2;

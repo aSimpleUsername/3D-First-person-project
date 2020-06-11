@@ -42,6 +42,7 @@ void mouseClick(int button, int state, int x, int y)
         lmbPressed = false;
 }
 
+
 void processMouse(void)
 {
     int dx = mx - (1920/2);     //TODO: Make these  height/width variables
@@ -64,9 +65,9 @@ void processMouse(void)
         ball1PrevPos[1] = yc + ly;
         ball1PrevPos[2] = zc + lz;
 
-        ball1ThrowVel[0] = lx * speed * 10;     //set velocity to direction we are facing
-        ball1ThrowVel[1] = ly * speed * 10;
-        ball1ThrowVel[2] = lz * speed * 10;
+        ball1ThrowVel[0] = lx * speed * throwForce;     //set velocity to direction we are facing
+        ball1ThrowVel[1] = ly * speed * throwForce;
+        ball1ThrowVel[2] = lz * speed * throwForce;
 
         ballHeld = false;
     }
@@ -140,9 +141,9 @@ void processKeys(void)
         if(ball1YRotationAngle > 360.0f)
             ball1YRotationAngle -= 360.0f;
     }
-    if(keyStates['k'] && ballHeld)   //if 'j' scale increases
+    if(keyStates['k'] && ballHeld)   //if 'k' scale increases
         ball1Scale += 0.05f;
-    if(keyStates['j'] && ballHeld)   //if 'k' scale decreases
+    if(keyStates['j'] && ballHeld)   //if 'j' scale decreases
         ball1Scale -= 0.05f;
 
     if(keyStates['m'])
@@ -150,6 +151,12 @@ void processKeys(void)
 
     if(keyStates['n'])
         gravMultiplier -= 0.01;
+
+    if(keyStates['o'])
+        throwForce += 0.1;
+
+    if(keyStates['i'])
+        throwForce -= 0.1;
 
      // distance formula: (P1,P2) = sqrt( (x2 -x1)^2 + (y2-y1)^2 + (z )
     double ball1Distance = fabs((sqrt( pow((xc - ball1CurrPos[0]), 2) + pow((yc - ball1CurrPos[1]), 2) + pow((zc - ball1CurrPos[2]), 2))));

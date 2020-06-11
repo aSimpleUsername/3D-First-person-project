@@ -7,7 +7,7 @@
 	"animation.h"
 	"modelLoader.h"
 
-1591893988 source:d:\school\20s1\ict289\assignment2\assignmemt2\userinput.c
+1591901627 source:d:\school\20s1\ict289\assignment2\assignmemt2\userinput.c
 	"userInput.h"
 
 1589552234 source:d:\school\20s1\ict289\assignment2\assignmemt2\display.c
@@ -20,19 +20,19 @@
 1589552145 d:\school\20s1\ict289\assignment2\assignmemt2\display.c
 	<GL/freeglut.h>
 
-1591887511 d:\school\20s1\ict289\assignment2\assignmemt2\drawscene.h
+1591900436 d:\school\20s1\ict289\assignment2\assignmemt2\drawscene.h
 	<GL/freeglut.h>
 	"animation.h"
 
-1591888699 source:d:\school\20s1\ict289\assignment2\assignmemt2\drawscene.c
+1591901774 source:d:\school\20s1\ict289\assignment2\assignmemt2\drawscene.c
 	"drawScene.h"
 
-1591887424 d:\school\20s1\ict289\assignment2\assignmemt2\animation.h
+1591899984 d:\school\20s1\ict289\assignment2\assignmemt2\animation.h
 	<GL/freeglut.h>
 	<math.h>
 	"drawScene.h"
 
-1591888586 source:d:\school\20s1\ict289\assignment2\assignmemt2\animation.c
+1591900236 source:d:\school\20s1\ict289\assignment2\assignmemt2\animation.c
 	"animation.h"
 
 1591893030 d:\school\20s1\ict289\assignment2\assignmemt2\userinput.h
