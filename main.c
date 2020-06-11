@@ -51,6 +51,7 @@ void display(void)
                 0, 1, 0);
 
     onScreenText();
+    grabBallPrompt();
     drawPillar();
     drawSunset();
     drawFloor();
