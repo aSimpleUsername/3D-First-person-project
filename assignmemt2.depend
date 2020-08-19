@@ -1,0 +1,49 @@
+# depslib dependency file v1.0
+1591911255 source:d:\school\20s1\ict289\assignment2\assignmemt2\main.c
+	<GL/freeglut.h>
+	<math.h>
+	"drawScene.h"
+	"userInput.h"
+	"animation.h"
+	"modelLoader.h"
+
+1591901627 source:d:\school\20s1\ict289\assignment2\assignmemt2\userinput.c
+	"userInput.h"
+
+1589552234 source:d:\school\20s1\ict289\assignment2\assignmemt2\display.c
+	<GL/freeglut.h>
+
+1589548613 d:\school\20s1\ict289\assignment2\assignmemt2\display.h
+
+1589544995 d:\school\20s1\ict289\assignment2\assignmemt2\userinput.c
+
+1589552145 d:\school\20s1\ict289\assignment2\assignmemt2\display.c
+	<GL/freeglut.h>
+
+1591905630 d:\school\20s1\ict289\assignment2\assignmemt2\drawscene.h
+	<GL/freeglut.h>
+	"animation.h"
+
+1591940885 source:d:\school\20s1\ict289\assignment2\assignmemt2\drawscene.c
+	"drawScene.h"
+
+1591899984 d:\school\20s1\ict289\assignment2\assignmemt2\animation.h
+	<GL/freeglut.h>
+	<math.h>
+	"drawScene.h"
+
+1591907981 source:d:\school\20s1\ict289\assignment2\assignmemt2\animation.c
+	"animation.h"
+
+1591893030 d:\school\20s1\ict289\assignment2\assignmemt2\userinput.h
+	<GL/freeglut.h>
+	"animation.h"
+
+1589618072 source:d:\school\20s1\ict289\assignment2\assignmemt2\modelloader.c
+	<stdio.h>
+	"modelLoader.h"
+
+1589618072 d:\school\20s1\ict289\assignment2\assignmemt2\modelloader.h
+	<GL/freeglut.h>
+	<stdio.h>
+

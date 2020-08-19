@@ -1,4 +1,7 @@
-# ict289-assignment2
-Assignment 2 for Murdoch Unit ICT289
+# 3D First Person Project
+Assignment for university. FPS camera in a 3D enviroment with 2 balls to interact with. Run with assignment2.exe
+- FPS movement
+- AABB Collision detection
+- Basic physics with balls
 
-- Push to personal branch, merge to develop, master is only for deployable code
+Made with C and OpenGL by Connor Nicholson 2020
