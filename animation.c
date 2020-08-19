@@ -205,7 +205,7 @@ void animate(void)
     }
 
     //collision with balls into each other
-    // distance formula: (P1,P2) = sqrt( (x2 -x1)^2 + (y2-y1)^2 + (z )
+    // distance formula: (P1,P2) = sqrt( (x2 -x1)^2 + (y2-y1)^2 + (z2-z1)^2
     double distance = fabs((sqrt( pow((ball2CurrPos[0] - ball1CurrPos[0]), 2) + pow((ball2CurrPos[1] - ball1CurrPos[1]), 2) + pow((ball2CurrPos[2] - ball1CurrPos[2]), 2))));
     if(distance <= ball1Scale + ball2Scale)//little extra to avoid glitching
      {

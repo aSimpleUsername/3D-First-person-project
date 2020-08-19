@@ -109,7 +109,7 @@ void drawSunset(void)
     glutSolidSphere(300, 100, 100);
     //lines accross sunset
     glColor4f(0.15, 0.0, 0.36, 1.0);
-    glLineWidth(150.0);     //max line width?
+    glLineWidth(15.0);     //max line width?
     for(int i=75; i>-100; i-=15)
     {
         glBegin(GL_LINES);
